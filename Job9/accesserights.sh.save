@@ -1,0 +1,15 @@
+export IFS=","
+cat Shell_Userlist.csv | while read Id Prenom Nom Mdp Role
+        do
+	sudo userdel $Prenom-$Nom
+        sudo useradd $Prenom-$Nom
+        sudo userdel Prenom-Nom
+        echo "$Prenom-$Nom:$Mdp" 
+	| sudo chpasswd
+        sudo usermod -g $Id $Prenom-$Nom
+                if [ "$Role" = "Admin" ]
+                then
+                sudo usermod -aG sudo $Prenom-$Nom
+                
+                fi
+        done
